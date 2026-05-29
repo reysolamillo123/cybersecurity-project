@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Database Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+
+    <div class="container wide">
+        <h1>Secure Dashboard</h1>
+        <p class="subtitle">Database records view (For demonstration purposes)</p>
+        
+        <div style="text-align: right; margin-bottom: 20px;">
+            <button class="btn" style="width: auto; padding: 8px 16px; background: rgba(239, 68, 68, 0.8);" onclick="logout()">Logout</button>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Password Hash</th>
+                        <th>Salt</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <tr>
+                        <td colspan="3" style="text-align: center;">Loading data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="footer-text" style="margin-top: 30px;">
+            <strong>Note:</strong> The pepper is securely stored in the backend and is NEVER saved in the database.
+        </p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Check if logged in (simulated by localStorage for this demo)
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            window.location.href = 'index.html';
+        }
+
+        // Fetch users
+        fetch('/users')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('userTableBody');
+                tbody.innerHTML = '';
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="3" style="text-align: center;">No users found in database.</td></tr>';
+                    return;
+                }
+                
+                data.forEach(user => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${escapeHtml(user.username)}</td>
+                        <td style="font-family: monospace; font-size: 12px; color: var(--text-muted);">${escapeHtml(user.password_hash)}</td>
+                        <td style="font-family: monospace; font-size: 12px; color: var(--text-muted);">${escapeHtml(user.salt)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching users:', error);
+                document.getElementById('userTableBody').innerHTML = '<tr><td colspan="3" style="text-align: center; color: var(--error-color);">Failed to load database records.</td></tr>';
+            });
+
+        // Simple HTML escaper to prevent XSS in dashboard
+        function escapeHtml(unsafe) {
+            return (unsafe || "").toString()
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

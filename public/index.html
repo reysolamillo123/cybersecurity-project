@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login System</title>
+    <!-- Use a modern Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+
+    <div class="container">
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Enter your credentials to securely access your account</p>
+
+        <div id="loginMessage" class="message"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="text" id="loginUsername" required placeholder=" ">
+                <label for="loginUsername">Username</label>
+            </div>
+            <div class="form-group">
+                <input type="password" id="loginPassword" required placeholder=" ">
+                <label for="loginPassword">Password</label>
+            </div>
+            
+            <button type="submit" class="btn">Login Securely</button>
+        </form>
+
+        <p class="footer-text">
+            Don't have an account? <a href="register.html">Register here</a>
+        </p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

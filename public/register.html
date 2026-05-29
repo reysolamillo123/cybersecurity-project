@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for check icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+
+    <div class="container">
+        <h1>Create Account</h1>
+        <p class="subtitle">Join our secure platform today</p>
+
+        <div id="registerMessage" class="message"></div>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <input type="text" id="regUsername" required placeholder=" ">
+                <label for="regUsername">Username</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="regPassword" required placeholder=" ">
+                <label for="regPassword">Password</label>
+                
+                <!-- Password Strength Meter Requirements -->
+                <div class="meter-container">
+                    <div class="meter-header">
+                        <span>Password Strength:</span>
+                        <span id="strengthText">Weak</span>
+                    </div>
+                    <div class="meter-bar-container">
+                        <div class="meter-bar" id="meterBar"></div>
+                    </div>
+                    <ul class="req-list">
+                        <li id="reqLower"><i class="fas fa-times"></i> At least one lowercase letter</li>
+                        <li id="reqUpper"><i class="fas fa-times"></i> At least one uppercase letter</li>
+                        <li id="reqDigit"><i class="fas fa-times"></i> At least one number</li>
+                        <li id="reqSymbol"><i class="fas fa-times"></i> At least one special character</li>
+                        <li id="reqLength"><i class="fas fa-times"></i> At least 12 characters</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="regConfirmPassword" required placeholder=" ">
+                <label for="regConfirmPassword">Confirm Password</label>
+            </div>
+            
+            <button type="submit" class="btn" id="regBtn" disabled>Register Securely</button>
+        </form>
+
+        <p class="footer-text">
+            Already have an account? <a href="index.html">Login here</a>
+        </p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
