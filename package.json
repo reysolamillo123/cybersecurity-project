@@ -2,7 +2,7 @@
   "name": "final_project_group",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "postinstall": "npm rebuild sqlite3 --build-from-source",
